@@ -1,0 +1,31 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# dotenv environment variables
+.env
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Build folders
+build/
+dist/
+
+# React
+*.cache/
+.cache/
+.vite/
+
+# Optional: vscode config
+.vscode/
