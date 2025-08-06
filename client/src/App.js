@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/users/top')
-      .then(res => setUsers(res.data))
-      .catch(err => console.error(err));
+    fetch('http://localhost:5001/api/leaderboard')
+      .then(res => res.json())
+      .then(setData)
+      .catch(console.error);
   }, []);
 
+  if (data.length === 0) return <p>Loading...</p>;
+
   return (
-    <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
-      <h1>🌍 Ripple Score Leaderboard</h1>
+    <div>
+      <h1>Impact Leaderboard</h1>
       <ul>
-        {users.map((user, index) => (
-          <li key={user.name}>
-            #{index + 1} — <strong>{user.name}</strong> (Ripple Score: {user.rippleScore})
-          </li>
+        {data.map((entry, idx) => (
+          <li key={idx}>{entry.name}: {entry.rippleScore}</li>
         ))}
       </ul>
     </div>
