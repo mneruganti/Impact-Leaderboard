@@ -13,18 +13,18 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="title">Impact Leaderboard</h1>
+      <h1 className="title gradient-text">Impact Leaderboard</h1>
 
       <div className="leaderboard">
-        <div className="leaderboard-header">
+        <div className="leaderboard-header entry">
           <span>Name</span>
           <span>Ripple Score</span>
         </div>
 
         {data.map((entry, idx) => (
-          <div className="leaderboard-entry" key={idx}>
-            <span>{entry.name}</span>
-            <span>{entry.rippleScore}</span>
+          <div className="leaderboard-entry entry" key={idx}>
+            <span className="gradient-text">{entry.name}</span>
+            <span className="gradient-text">{entry.rippleScore}</span>
           </div>
         ))}
       </div>

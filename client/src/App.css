@@ -2,7 +2,15 @@ body {
   margin: 0;
   font-family: 'Arial', sans-serif;
   background-color: #1e1e1e;
-  color: white;
+  color: rgb(172, 255, 248);
+}
+
+.gradient-text {
+  background: linear-gradient(to bottom right, #aaedff, #edacc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .app {
@@ -13,6 +21,8 @@ body {
 .title {
   font-size: 2.5rem;
   margin-bottom: 30px;
+  color:rgb(245, 176, 243);
+  font-family: 'Press Start 2P', cursive;
 }
 
 .leaderboard {
@@ -29,6 +39,7 @@ body {
   margin-bottom: 15px;
   font-weight: bold;
   border: 1px solid #444;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .leaderboard-entry {
@@ -40,8 +51,23 @@ body {
   border-radius: 10px;
   transition: background 0.2s ease-in-out;
   border: 1px solid #3a3a3a;
+  font-family: 'Tektur', sans-serif;
 }
 
 .leaderboard-entry:hover {
   background-color: #3a3a3a;
 }
+
+.entry {
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.entry:hover {
+  border: 2px solid white;
+  box-shadow: 0 0 15px 2px white;
+}
+
