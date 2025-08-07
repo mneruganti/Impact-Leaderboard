@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
   const [data, setData] = useState([]);
@@ -10,16 +11,23 @@ function App() {
       .catch(console.error);
   }, []);
 
-  if (data.length === 0) return <p>Loading...</p>;
-
   return (
-    <div>
-      <h1>Impact Leaderboard</h1>
-      <ul>
+    <div className="app">
+      <h1 className="title">Impact Leaderboard</h1>
+
+      <div className="leaderboard">
+        <div className="leaderboard-header">
+          <span>Name</span>
+          <span>Ripple Score</span>
+        </div>
+
         {data.map((entry, idx) => (
-          <li key={idx}>{entry.name}: {entry.rippleScore}</li>
+          <div className="leaderboard-entry" key={idx}>
+            <span>{entry.name}</span>
+            <span>{entry.rippleScore}</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
