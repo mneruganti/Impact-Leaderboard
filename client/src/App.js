@@ -21,10 +21,19 @@ function App() {
           <span>Ripple Score</span>
         </div>
 
-        {data.map((entry, idx) => (
+        {data.length > 0 && data.map((entry, idx) => (
           <div className="leaderboard-entry entry" key={idx}>
             <span className="gradient-text">{entry.name}</span>
-            <span className="gradient-text">{entry.rippleScore}</span>
+            <span className="score-with-tooltip">
+  <span className="gradient-text">{entry.rippleScore}</span>
+  <div className="tooltip">
+    <strong>Breakdown:</strong><br />
+    Mentions: {entry.metrics?.mentions}<br />
+    Sentiment: {entry.metrics?.sentiment}<br />
+    Reach: {entry.metrics?.reach.toLocaleString()}<br />
+    Velocity: {entry.metrics?.velocity}
+  </div>
+</span>
           </div>
         ))}
       </div>

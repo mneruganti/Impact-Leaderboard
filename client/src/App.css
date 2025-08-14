@@ -71,3 +71,37 @@ body {
   box-shadow: 0 0 15px 2px white;
 }
 
+.score-with-tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white; /* important: set explicit text color */
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+
+  /* Position to the right of the parent */
+  top: 50%;
+  left: 175%; /* slightly outside parent */
+  transform: translateY(-50%); /* center vertically */
+  
+  width: max-content;
+  max-width: 250px;
+  font-size: 0.8em;
+  box-shadow: 0 0 8px rgba(255,255,255,0.2);
+
+  /* add this to override parent gradient text */
+  -webkit-text-fill-color: unset !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+}
+
+.score-with-tooltip:hover .tooltip {
+  visibility: visible;
+}
