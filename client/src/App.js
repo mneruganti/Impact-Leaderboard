@@ -23,17 +23,18 @@ function App() {
 
         {data.length > 0 && data.map((entry, idx) => (
           <div className="leaderboard-entry entry" key={idx}>
-            <span className="gradient-text">{entry.name}</span>
+            <span className="gradient-text">
+              <a href={entry.link} target="_blank" rel="noopener noreferrer">{entry.name}</a>
+            </span>
             <span className="score-with-tooltip">
-  <span className="gradient-text">{entry.rippleScore}</span>
-  <div className="tooltip">
-    <strong>Breakdown:</strong><br />
-    Mentions: {entry.metrics?.mentions}<br />
-    Sentiment: {entry.metrics?.sentiment}<br />
-    Reach: {entry.metrics?.reach.toLocaleString()}<br />
-    Velocity: {entry.metrics?.velocity}
-  </div>
-</span>
+              <span className="gradient-text">{entry.rippleScore}</span>
+              <div className="tooltip">
+                <strong>Breakdown:</strong><br />
+                Summary Length: {entry.metrics?.summaryLength || 'N/A'}<br />
+                Has Image: {entry.metrics?.hasImage ? 'Yes' : 'No'}<br />
+                Reach (last 30 days): {entry.metrics?.reach?.toLocaleString() || 'N/A'}
+              </div>
+            </span>
           </div>
         ))}
       </div>
