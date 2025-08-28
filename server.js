@@ -1,6 +1,7 @@
+//
 const express = require('express');
 const cors = require('cors');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const app = express();
 const PORT = 5001;
@@ -82,14 +83,20 @@ async function fetchPageviews(article) {
   }
 }
 
-// Fetch number of Crossref events (depth)
-async function fetchCrossrefMentions(name) {
+// --- NEW: Fetch number of references in Wikipedia article (Depth proxy) ---
+async function fetchWikipediaReferences(article) {
   try {
-    const url = `https://api.eventdata.crossref.org/v1/events?query=${encodeURIComponent(name)}`;
+    const url = `https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvslots=*&format=json&titles=${article}&origin=*`;
     const res = await fetch(url);
     if (!res.ok) return 0;
+
     const data = await res.json();
-    return data.message?.events?.length || 0;
+    const page = Object.values(data.query.pages)[0];
+    const content = page.revisions?.[0]?.slots?.main?.['*'] || "";
+
+    // Count <ref> tags as proxy for depth
+    const refCount = (content.match(/<ref/g) || []).length;
+    return refCount;
   } catch {
     return 0;
   }
@@ -143,7 +150,7 @@ app.get("/api/leaderboard", async (req, res) => {
         const reach = await fetchPageviews(art.article);
         if (reach < 100_000) return null;
 
-        const depth = await fetchCrossrefMentions(name);
+        const depth = await fetchWikipediaReferences(art.article);
         const duration = await fetchPageAge(art.article);
         const rippleScore = computeRippleScore({ reach, depth, duration });
 
