@@ -1,6 +1,21 @@
-//
+/*
+  require() is a function from the require module that takes in a file path and
+  searches for the specific module. It prioritizes built in modules, than file
+  paths relative to the current file, and finally installed modules from the 
+  node_modules directories. Once the module is found, it wraps the content and
+  then allows you to access the modules public API.
+*/
+
+// import express to use as a framework to make routing and requests easier to handle
 const express = require('express');
+
+// require cors (Cross Origin Resource Sharing) to deal with security from browser and 
+// be be able to run on two different ports. 
 const cors = require('cors');
+
+// Node.js does not have a built in fetch like broswers so in order to call https
+// requests and fetch informations from APIs, I need to manually add
+// this line to import the node-fetch module
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 const app = express();
